@@ -1,6 +1,6 @@
 Solution has answer only to last question. Solutions to other 2 are easy made from last one.
 
-Question 1
+#Question 1
 GENERAL DIRECTIONS:
 
 The file contains all of the integers between 1 and 10,000 (inclusive, with no repeats) in unsorted order. The integer in the ith row of the file gives you the ith entry of an input array.
