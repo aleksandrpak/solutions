@@ -21,7 +21,7 @@ So if your answer is 1198233847, then just type 1198233847 in the space provided
 (We do not require you to submit your code, so feel free to use the programming language of your choice, just type the numeric answer in the following space.)
 
 
-Question 2
+#Question 2
 GENERAL DIRECTIONS AND HOW TO GIVE US YOUR ANSWER:
 See the first question.
 
@@ -30,7 +30,7 @@ DIRECTIONS FOR THIS PROBLEM:
 Compute the number of comparisons (as in Problem 1), always using the final element of the given array as the pivot element. Again, be sure to implement the Partition subroutine exactly as it is described in the video lectures. Recall from the lectures that, just before the main Partition subroutine, you should exchange the pivot element (i.e., the last element) with the first element.
 
 
-Question 3
+#Question 3
 GENERAL DIRECTIONS AND HOW TO GIVE US YOUR ANSWER:
 See the first question.
 
