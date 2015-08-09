@@ -1,21 +1,26 @@
 package main
 
 import (
+	"archive/zip"
 	"bufio"
 	"fmt"
 	"log"
-	"os"
 	"sort"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	file, err := os.Open("in.txt")
+	r, err := zip.OpenReader("in.txt.zip")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer r.Close()
 
+	file, err := r.File[0].Open()
+	if err != nil {
+		log.Fatal(err)
+	}
 	defer file.Close()
 
 	graph := make(map[int][]int)
