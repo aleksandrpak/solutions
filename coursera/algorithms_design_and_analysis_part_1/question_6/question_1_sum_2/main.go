@@ -38,7 +38,6 @@ func main() {
 			for k := range nums {
 				diff := t - k
 				if _, found := nums[diff]; found {
-					fmt.Println("found: ", t)
 					c <- true
 					break
 				}
