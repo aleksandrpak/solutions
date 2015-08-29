@@ -1,0 +1,56 @@
+﻿<Window x:Class="TextIndexing.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Service Client" Height="480" Width="640">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Grid HorizontalAlignment="Stretch" Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Column="0">Add to index:</Label>
+			<TextBox Name="IndexObjectTextBox" Grid.Column="1" Margin="3" KeyUp="IndexObjectTextBoxKeyUpEventHandler">../../../Books</TextBox>
+			<Button Name="ChooseFileButton" Grid.Column="2" Margin="3" Click="ChooseFileButtonClickEvenHandler">File</Button>
+			<Button Name="ChooseDirectoryButton" Grid.Column="3" Margin="3" Click="ChooseDirectoryButtonClickEventHandler">Directory</Button>
+			<Button Name="SendIndexObjectButton" Grid.Column="4" Margin="3" Click="SendIndexObjectButtonClickEventHandler">Send</Button>
+		</Grid>
+
+		<Separator HorizontalAlignment="Stretch" Grid.Row="1"/>
+
+		<Grid HorizontalAlignment="Stretch" Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Column="0">Get files query:</Label>
+			<TextBox Name="QueryTextBox" Grid.Column="1" Margin="3" KeyUp="QueryTextBoxKeyUpEventHandler">Князь</TextBox>
+			<Button Name="SendQueryButton" Grid.Column="2" Margin="3" Click="SendQueryButtonClickEventHandler">Send</Button>
+		</Grid>
+
+		<ListView Name="LogView" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+		<Grid HorizontalAlignment="Stretch" Grid.Row="4">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Column="0">Host url:</Label>
+			<TextBox Name="HostUrlTextBox" Grid.Column="1" Margin="3">http://localhost:1234/api/v1/</TextBox>
+		</Grid>
+	</Grid>
+</Window>
