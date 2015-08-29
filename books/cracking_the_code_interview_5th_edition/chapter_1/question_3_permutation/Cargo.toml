@@ -1,0 +1,4 @@
+[package]
+name = "question_3_permutation"
+version = "0.1.0"
+authors = ["Aleksandr Pak <aleksandr.pak@undev.ru>"]
