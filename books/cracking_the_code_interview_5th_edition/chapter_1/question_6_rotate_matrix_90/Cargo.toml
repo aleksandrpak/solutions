@@ -1,0 +1,7 @@
+[package]
+name = "question_6_rotate_matrix_90"
+version = "0.1.0"
+authors = ["Aleksandr Pak <aleksandr.pak@undev.ru>"]
+
+[dependencies]
+rand = "*"
