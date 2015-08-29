@@ -1,20 +1,23 @@
 extern crate rand;
 
-use rand::distributions::{IndependentSample, Range};
+use std::fmt::Debug;
+use rand::{Rand, Rng};
 
 fn main() {
-	let mut matrix = generate_matrix(4);
+	let original = generate_matrix::<u16>(7);
+	let mut rotated = original.clone();
 
+    rotate_90(&mut rotated);
+
+    println!("is rotated: {:?}", is_rotated(&original, &rotated));
     println!("before rotation:");
-    print_matrix(&matrix);
-
-    rotate_90(&mut matrix);
+    print_matrix(&original);
 
     println!("\nafter rotation:");
-    print_matrix(&matrix);
+    print_matrix(&rotated);
 }
 
-fn rotate_90(m: &mut Vec<Vec<i32>>) {
+fn rotate_90<T: Copy>(m: &mut Vec<Vec<T>>) {
 	let n = m.len();
 
 	for i in 0..(n/2) {
@@ -28,27 +31,39 @@ fn rotate_90(m: &mut Vec<Vec<i32>>) {
 	}
 }
 
-fn replace_elem(m: &mut Vec<Vec<i32>>, i: usize, j: usize, elem: i32) -> i32 {
+fn replace_elem<T: Copy>(m: &mut Vec<Vec<T>>, i: usize, j: usize, elem: T) -> T {
 	let tmp = m[i][j];
 	m[i][j] = elem;
 	tmp
 }
 
-fn print_matrix(m: &Vec<Vec<i32>>) {
+fn is_rotated<T: Eq>(original: &Vec<Vec<T>>, rotated: &Vec<Vec<T>>) -> bool {
+	let n = original.len();
+	for i in 0..original.len() {
+		for j in 0..original.len() {
+			if original[i][j] != rotated[j][n - i - 1] {
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
+fn print_matrix<T: Debug>(m: &Vec<Vec<T>>) {
 	for row in m {
 		println!("{:?}", row);
 	}
 }
 
-fn generate_matrix(n: usize) -> Vec<Vec<i32>> {
+fn generate_matrix<T: Rand>(n: usize) -> Vec<Vec<T>> {
 	let mut m = Vec::with_capacity(n);
-	let between = Range::new(1, 10);
-    let mut rng = rand::thread_rng();
+	let mut rng = rand::thread_rng();
 
 	for _ in 0..n {
 		let mut row = Vec::with_capacity(n);
 		for _ in 0..n {
-			row.push(between.ind_sample(&mut rng));
+			row.push(rng.gen());
 		}
 
 		m.push(row);
