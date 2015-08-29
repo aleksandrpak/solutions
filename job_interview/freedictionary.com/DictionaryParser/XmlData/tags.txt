@@ -1,0 +1,195 @@
+ENTRY - If next entry contains the same word => union
+
+ABB - 
+	"&nbsp;("
+	")"
+
+SPECIES
+ITAL
+GENUS
+GENSPEC
+FOR
+FAMILY
+EMPH
+ACRO -
+	"<i>"
+	"</i>"
+	
+SUBSPEC -
+	"<span style='font-weight:normal;font-style:normal;font-variant:normal;'>subsp.&nbsp;</span><i>"
+	"</i>."
+
+CF - 
+	"<span style='font-weight:normal;font-style:normal;font-variant:normal;'>&nbsp;Cf.:&nbsp;</span><i>"
+	"</i>."
+
+CHEM -
+	"&nbsp;"
+	";"
+
+FRACTION - String.Empty
+NUM - String.Empty
+DENOM -
+	"/"
+	String.Empty
+
+EXAMPLE INTRO="eg" -
+	"<i>e.g.,&nbsp;</i>"
+	String.Empty
+
+EXAMPLE INTRO="ie"
+	"<i>i.e.,&nbsp;</i>"
+	String.Empty
+
+SEEAL - Place link if headword exists. Convert to alias if just link (see also).
+	"&nbsp;See also:&nbsp:<i>"
+	"</i>."
+
+SEEUN - Place link if headword exists. Convert to alias if just link (synonym).
+	"&nbsp;See under:&nbsp:<i>"
+	"</i>."
+		
+SYXT
+SYNX - Place link if headword exists. Convert to alias if just link (synonym).
+	"&nbsp;Syn:&nbsp;<i>"
+	"</i>."
+
+SYNX OFFALT="Y" - Place link if headword exists. Convert to alias if just link (synonym).
+	"&star; official alternate term for&nbsp;<i>"
+	"</i>."
+
+REF - Place link if headword exists. Convert to alias if just link (synonym).
+SEE - Place link if headword exists. Convert to alias if just link (synonym).
+	"<i>"
+	"</i>."
+
+GSEE
+GSEE TY="1" - Place link if headword exists. Convert to alias if just link (synonym).
+	String.Empty
+	"."
+
+MHP/
+	"-\U+2027"
+
+SP/
+HP/ -
+	"\U+2027" - <SEN>
+	"|" - <LEM>
+
+INSUB -
+	"<span style='font-weight:normal;font-style:normal;font-variant:normal;'>"
+	"</span>"
+
+IOR - Add ",&nbsp;" if next is IOR
+	"<span style='font-weight:normal;font-style:normal;font-variant:normal;'>"
+	"</span>"
+
+LEM CLS="ABB" -
+	String.Empty
+	"."
+
+LEM CLS="BIO" -
+	String.Empty
+	","
+
+STXT
+SEN
+LEM CLS="SYM" -
+	String.Empty
+	String.Empty
+
+LOR -
+	<span class='hw'>
+	</span>
+
+OFFALT -
+	String.Empty
+	"&star"
+
+PRON -
+	"<span class='pron'>&nbsp;("
+	"</span>)"
+	
+PUSE
+USE - but <i /> should be replaced with normal text
+	<i>
+	</i>
+
+RSEQ -
+	"&nbsp;("
+	")"
+
+SEQ -
+	"&nbsp;"
+	String.Empty
+
+SMCAP -
+	"<span style='font-variant:small-caps'>"
+	"</span>"
+
+SUPER -
+	"<sup>"
+	"</sup>"
+
+SUB -
+	"<sub>"
+	"</sub>"
+
+SYST -
+	"&nbsp;"
+	";"
+	
+VORL -
+	(LEM CLS=BIO) ? "&nbsp;(" : ",&nbsp;"
+	(LEM CLS=BIO) ? ")" : String.Empty
+
+VOR
+VOR LEM="BIO" -
+	First Vor ? String.Empty : ",&nbsp;"
+	String.Empty
+=====================================================================
+
+SAPEC - !!! (small lightface)
+	"<b>"
+	".</b>"
+
+GPLU - !!! (small lightface)
+	"<span>, gen. and pl.&nbsp;</span>"
+	String.Emtpy
+
+GEN - !!! (small lightface)
+	"<span>, gen.&nbsp;</span>"
+	String.Emtpy
+
+PLUR - !!! (small lightface)
+	"<span>, pl.&nbsp;</span>"
+	String.Emtpy
+
+SING - !!! (small lightface)
+	"<span>, sing.&nbsp;</span>"
+	String.Emtpy
+
+ETYM
+CIT - !!! (small lightface)
+	"&nbsp;[<span>"
+	"</span>]"
+
+ETYMON - !!! (small small italic)
+
+FORMULA WIDTH="3.5" HEIGHT="2.9" FILE="TERT.EPS" BREAK="Y"/ - Skip
+FORMULA WIDTH="3.9" HEIGHT="2.3" FILE="SECD.EPS" BREAK="Y"/ - Skip
+
+STRS/ - !!! (just ignore now)
+=====================================================================
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1450 @@
+
+The format of this document is as follows:
+
+CODE:
+	<CODE>    -   This is the SGML code that is being described.
+FUNCTION:
+	A brief description of the code.
+PARAMETERS:
+	PARAM=VALUE  (R) a description of the parameter, and what it does.
+			 if a parameter is present, the actual code found in 
+			 the file will be <CODE PARAM=VALUE>.  The (R) means 
+			 that the parameter is required.  An (O) means that the 
+			 parameter is optional, and may or may not be present
+			 with the code in the file.
+
+
+
+
+
+The following codes are stored in the database:
+
+
+CODE:
+	<NBS>
+FUNCTION:
+	A non-breakable space
+
+
+
+
+
+CODE:
+	<STRS>
+FUNCTION:
+	A stress point.  Typeset as a prime.
+
+
+
+
+CODE:
+	<ETYMON>
+FUNCTION:
+	Specifies the beginning of an etymon.  Change the current font to small
+	small italic.
+
+
+
+CODE:
+	</ETYMON>
+FUNCTION:
+	Specifies the end of an etymon.  Change the current font to small
+	small lightface.
+
+
+
+CODE:
+	<DFL>
+FUNCTION:
+	Specifies the beginning of a form of the current lemma's orthography.
+	Various processing is done on the text between this code and its end
+	code in the database extract program, most notably the substitution of
+	an abbreviation for the lemma for the text between the codes.  Also,
+	depending on the placement of these code in relation to other codes, 
+	this code may signal a typeface change to italics, so it will be
+	specified at the description of those codes whether dfl italics is
+	inhibited or not.
+
+	The first thing that this code does is save the current font style,
+	which is then restores at the </DFL> code.  If no parameters are then
+	specified and dfl italics are not inhibited, then the typeface is
+	changed to italics.
+
+	If one of the parameters is specified, and that parameter is not
+	FOL=ABBREV, and dfl italics are not inhibited, then the typeface is
+	changed to italics.
+PARAMETERS:
+	FOL=INFLECT  (O)	begin of an inflected form of the lemma
+	   =CINFLECT (O)	begin of a capitalized inflected form of lemma
+	   =ABBREV   (O)	begin of an abbreviation of the lemma
+	   =CAP      (O)	begin of a capitalized form of the lemma
+
+
+
+CODE:
+	</DFL>
+FUNCTION:
+	Specifies the end of a form of the current lemma's orthography.  The
+	font style saved in the <DFL> code is restored here.
+
+
+
+
+CODE:
+	<POS>
+FUNCTION:
+	Specifies the beginning of positioning info on a chemical name.  The 
+	current typeface is changed to italics.
+PARAMETER:
+	KIND=STEREO  (O)	The current typeface is changed to small caps
+				instead of italics.
+
+
+
+CODE:
+	</POS>
+FUNCTION:
+	Specifies the end of positioning info on a chemical name.  The current 
+	typeface is changed to the font that was in effect before the <POS>
+	code. 
+
+
+
+
+CODE:
+	<EXAMPLE>
+FUNCTION:
+	Specifies the beginning of an example sentence.  Various text is output,
+	depending on the parameters.  One of the parameters must be present.
+PARAMETERS:
+	INTRO=eg 		outputs "e.g., " in italics
+	INTRO=ie 		outputs "i.e., " in italics
+	INTRO=qv 		outputs "q.v., " in italics
+
+
+
+CODE:
+	</EXAMPLE>
+FUNCTION:
+	Specifies the end of an example sentence.
+
+
+
+NOTE:  The following codes are going to change sometime in late June or Early
+       July 1991.  The old and new codes are boht listed.
+
+CODE:
+	<HP>	new
+	<SP>	old
+FUNCTION:
+	Specifies a primary hyphenation point.  If this code is within the 
+	scope of the <LEM> codes, then a vertical bar is output.
+
+
+
+CODE:
+	<SP>		new
+	<SP HP=NO>	old
+FUNCTION:
+	Specifies a secondary hyphenation point.  
+
+
+
+CODE:
+	<MHP>		new
+	<SP MHP=NO> 	old
+FUNCTION:
+	Specifies a hard hyphenation point, which is a hyphenation point that
+	immediately follows a hyphen.  
+
+	This codes is not specified by a user.  The user simply inputs a <HP> 
+	following the hyphen.  The extract program finds all of these and
+	and converts them to <MHP>
+
+
+
+CODE:
+	- none -	new
+	<SP ST=PR>	old
+FUNCTION:
+	Specifies a hyphenation point that is also a primary stress point.  If
+	this code is within the scope of the <SUBS> codes, then a prime mark is
+	output.
+
+
+
+
+CODE:
+	<SUPER>
+FUNCTION:
+	Specifies the beginning of a superscript.
+
+
+
+CODE:
+	</SUPER>
+FUNCTION:
+	Specifies the end of a superscript.
+
+
+
+
+
+CODE:
+	<SUB>
+FUNCTION:
+	Specifies the beginning of a subscript.
+
+
+
+CODE:
+	</SUB>
+FUNCTION:
+	Specifies the end of a subscript.
+
+
+
+
+
+CODE:
+	<FRACTION>
+	<NUM>
+	</NUM>
+	<DENOM>
+	</DENOM>
+	</FRACTION>
+FUNCTION:
+	These codes specify a slashed fraction.  The numerator of the fraction
+	is placed between the <NUM> codes, and the denominator is placed
+	between the <DENOM> codes.  A slash is output at the <DENOM> code.
+
+
+
+
+
+CODE:
+        <SMCAP>
+FUNCTION:
+        Specifies the beginning of some text to be typeset in small caps.
+        Saves the current font to be restored in the </SMCAP> code, and then
+        changes the current font to small caps.
+
+
+
+CODE:
+        </SMCAP>
+FUNCTION:
+        Specifies the end of text to be small capped.  Restore the font in
+        effect when the <SMCAP> codes was encountered.
+
+
+
+
+CODE:
+        <FOR>
+FUNCTION:
+        Specifies the beginning of a foreign word or phrase.  Saves the current
+        font, and then changes the font to italics.
+
+
+
+CODE:
+        </FOR>
+FUNCTION:
+        Specifies the end of a foreign word or phrase.  Restores the font
+        in effect at the beginning of the corresponding begin code.
+
+
+
+
+CODE:
+        <GENSPEC>
+FUNCTION:
+        Specifies the beginning of a genus species. Saves the current
+        font, and then changes the font to italics.
+
+
+
+CODE:
+        </GENSPEC>
+FUNCTION:
+        Specifies the end of a genus species.  Restores the font
+        in effect at the beginning of the corresponding begin code.
+
+
+
+
+CODE:
+        <GENUS>
+FUNCTION:
+        Specifies the beginning of a genus. Saves the current
+        font, and then changes the font to italics.
+
+
+
+CODE:
+        </GENUS>
+FUNCTION:
+        Specifies the end of a genus.  Restores the font
+        in effect at the beginning of the corresponding begin code.
+
+
+
+
+CODE:
+        <FAMILY>
+FUNCTION:
+        Specifies the beginning of a family.  Saves the current
+        font, and then changes the font to italics.
+
+
+
+CODE:
+        </FAMILY>
+FUNCTION:
+        Specifies the end of a family.  Restores the font
+        in effect at the beginning of the corresponding begin code.
+
+
+
+
+CODE:
+        <ITAL>
+FUNCTION:
+        Specifies the beginning of a italic word or phrase.  Saves the current
+        font, and then changes the font to italics.
+
+	This code should be used very rarely, because any occasion that calls
+	for this code frequently should cause the creation of a new code.
+
+	Also, see the <EMPH> code
+
+
+CODE:
+        </ITAL>
+FUNCTION:
+        Specifies the end of a italic word or phrase.  Restores the font
+        in effect at the beginning of the corresponding begin code.
+
+
+
+
+CODE:
+        <ACRO>
+FUNCTION:
+        Specifies the beginning of a acronym letter.  Saves the current
+        font, and then changes the font to italics.
+
+
+
+CODE:
+        </ACRO>
+FUNCTION:
+        Specifies the end of a acronym letter.  Restores the font
+        in effect at the beginning of the corresponding begin code.
+
+
+
+
+CODE:
+        <EMPH>
+FUNCTION:
+        Specifies the beginning of an emphasized word or phrase.  Saves the 
+        current font, and then changes the font to italics.
+
+
+
+CODE:
+        </EMPH>
+FUNCTION:
+        Specifies the end of an emphasized word or phrase.  Restores the font
+        in effect at the beginning of the corresponding begin code.
+
+
+
+
+CODE:
+        <SPECIES>
+FUNCTION:
+        Specifies the beginning of a species.  Saves the current
+        font, and then changes the font to italics.
+
+
+
+CODE:
+        </SPECIES>
+FUNCTION:
+        Specifies the end of a species.  Restores the font
+        in effect at the beginning of the corresponding begin code.
+
+
+
+
+CODE:
+        <SUBSPEC>
+FUNCTION:
+        Specifies the beginning of a subspecies. Saves the current
+        font, outputs "subsp. " in the normal font, and then changes the font 
+        to italics.
+
+
+
+CODE:
+        </SUBSPEC>
+FUNCTION:
+        Specifies the end of a subspecies.  Restores the font
+        in effect at the beginning of the corresponding begin code.
+
+
+
+
+
+
+CODE:
+        <VARIETY>
+FUNCTION:
+        Specifies the beginning of a variety. Outputs the text "var. " in 
+	light face.
+
+
+
+CODE:
+        </VARIETY>
+FUNCTION:
+        Specifies the end of a variety.
+
+
+
+
+
+CODE:
+        <PARA>
+FUNCTION:
+        Start of a new paragraph.  Put out a little extra lead and indent
+	the first line.
+
+
+
+CODE:
+        <S TY=I>
+FUNCTION:
+	Dummy code that doesnt to anything.  This code is used in 
+	chem_formula, syst_name, and pronunciations in order for a space
+	to appear in the database field (the space between the "S" and 
+	the "TY", so that the screen handler can break lines at this space.
+	
+
+
+
+CODE:
+        <OVER>
+FUNCTION:
+	This format places text vertically over other text.
+	It can also optionally place 3 pieces of text in a vertical row.
+PARAMETERS:
+	WHAT=\...\   (R)	text for the bottom
+	OVER=\...\   (R)	text for on top
+	UNDER=\...\  (O)	text below "what"
+
+
+
+CODE:
+        <SUPERSUB>
+FUNCTION:
+	This format creates both a superscript and a subscript at the 
+	same time.
+PARAMETERS:
+	SUPER=\...\   (R)	superscript text
+	SUB=\...\     (R)	subscript text
+
+
+
+CODE:
+        <OVLINE>
+FUNCTION:
+	This format causes a line to be placed over the enclosed text
+PARAMETERS:
+	LOWER=Y   (O)		put line over lowercase text
+
+
+CODE:
+        </OVLINE>
+FUNCTION:
+	end code
+
+
+
+CODE:
+        <OVSTRK>
+FUNCTION:
+	This format causes the enclosed text to have a line drawn through it
+
+
+CODE:
+        </OVSTRK>
+FUNCTION:
+	end code
+
+
+
+
+CODE:
+        <FNAME>
+FUNCTION:
+	This format identifies the first name in a bio entry.
+
+
+CODE:
+        </FNAME>
+FUNCTION:
+	end code
+
+
+
+
+
+
+
+
+
+
+CODE:
+        <FORMULA>
+FUNCTION:
+	This format identifies where space should be left for a formula that
+	will not fit within one line.
+PARAMETERS:
+	Both height and width parameters are not required, at least one of them must be present.
+	If the file parameter appears, then there must be both a width and a height specified.
+
+        WIDTH=...	 (R)       width of space to leave (in PICA.POINT format)
+        HEIGHT=...       (R)       height of space to leave (in PICA.POINT format)
+	FILE=\...\	 (O)	   name of encapsulated postscript file to place in the formula space
+	BREAK=Y		 (O)	   specify that the formula should be placed on a separate line
+
+
+CODE:
+        </FORMULA>
+FUNCTION:
+	end code
+
+
+
+
+The following codes are supplied by the database extract program:
+
+CODE: 
+	<START PNUM=# DROP=#>
+FUNCTION: 
+	Specifies start of input file
+PARAMETERS:
+	PNUM=#	(R)	The # is the page number that is assigned to the first
+			page.
+	DROP=#	(R)	The first page will have an amount of white space
+			specified by # left at the top of the first page.
+	CSPEC=  (O)	If this file was extracted with the purpose of creating
+			a speciality galley, this is the class code for the
+			speciality.
+	DATE=	(O)	If this file was extracted with the purpose of creating
+			a speciality galley, this contains the date on which 
+			the extract was created.
+
+
+
+CODE:
+	<MAIN>
+FUNCTION:
+	Specifies the start of a lemma.  
+
+
+
+CODE: 
+	</MAIN>	
+FUNCTION:
+	Specifies the end of a lemma.  Causes a line break, and any windows 
+	defined for the lemma to be output.
+
+
+
+
+CODE:
+	<LEM>
+FUNCTION:
+	Specifies the begining of the lemma information, including the lemma's
+	orthography, any variant's or inflected form's orthography, any 
+	abbreviations for the lemma or variants, the pronuncation, and the 
+	etymology.
+PARAMETERS:
+	CLS=BIO   (O)	the fact that this parameter was present is saved and 
+			used in the processing of the </LEM>, <VOR>, and 
+			</VOR> codes.
+	   =SYM
+		
+	ORTH=\..\ (R)   this information is saved for use in the running
+			heading.
+	TABLE=YES (O)	outputs the beginning part of a table artwork, and
+			saves the fact that this parameter was present, for use
+			in the </ENT> code.
+	SPCOMB=Y  (O)	Denotes that the term is a special combining form	
+	HIGHPROF=Y (O)	Denotes that the term is a high profile term
+
+
+
+CODE:
+	</LEM>
+FUNCTION:
+	Specifies the ending point of the information started with the <LEM>
+	code.  If the <LEM> code had the CLS=BIO parameter, then it outputs a
+	comma.  if the <LEM> code had the CLS=SYM parameter, then it outputs
+	nothing, otherwise it outputs a period.  Changes the default font to
+	small lightface.
+
+
+
+
+CODE:
+	<ENT>
+FUNCTION:
+	Specifies the beginning of an entry.
+
+
+
+CODE:
+	</ENT>
+FUNCTION:
+	Specifies the end of an entry.  If the TABLE=YES parameter was present
+	in the <LEM> parameter, then it outputs the end of a table artwork.
+
+
+
+
+CODE:
+	<LOR>
+FUNCTION:
+	Specifies the beginning of a lexeme's orthography.  Make the current
+	font bold. If this code is within the scope of a <MAIN> code, then
+	slightly increase the point size.
+
+        Turns off dfl italics.
+
+	If the code is within the scope of a <LEM> or <SUBS> code that is
+	marked as a special combining form, a recycle symbol is output.
+
+
+
+CODE:
+	</LOR>
+FUNCTION:
+	Specifies the end of the lexeme's orthography.  Changes the default
+	font back to light face.
+
+        Turns on dfl italics.
+
+
+
+
+CODE:
+	<VORL>
+FUNCTION:
+	Specifies the beginning of a list of variant orthographies.  If the 
+	CLS=BIO parameter was present in the <LEM> code, then outputs " (",
+	otherwise outputs ", ".
+
+
+
+CODE:
+	</VORL>
+FUNCTION:
+	Specifies the end of a list of variant orthographies. If the CLS=BIO 
+	parameter was present in the <LEM> code, then a right paren is output.
+
+
+CODE:
+	<VOR>
+FUNCTION:
+	Specifies the beginning of a variant orthography.  If this is not the
+	first <VOR> code encountered between <VORL> codes, a ", " is output.
+
+        Turns off dfl italics.
+PARAMETERS:
+	LEM=BIO   (O)	this parameter has no use in the typesetting/output
+			processing.  However, it was used at one point, and
+			is left in to be backward compatible. 
+			
+			
+
+
+
+CODE:
+	</VOR>
+FUNCTION:
+	Specifies the end of a variant orthography
+
+        Turns on dfl italics.
+
+
+
+
+CODE:
+	<GEN>
+FUNCTION:
+	Specifies the beginning of genitive inflected forms.  Outputs ", gen. "
+	in small lightface.
+
+
+
+CODE:
+	</GEN>
+FUNCTION:
+	Specifies the end of genitive inflected forms.
+
+
+
+CODE:
+	<GPLU>
+FUNCTION:
+	Specifies the beginning of genitive plural inflected forms.  Outputs 
+	", gen. and pl. " in small lightface.
+
+
+
+CODE:
+	</GPLU>
+FUNCTION:
+	Specifies the end of genitive plural inflected forms.
+
+
+
+CODE:
+	<PLUR>
+FUNCTION:
+	Specifies the beginning of plural inflected forms.  Outputs ", pl. "
+	in small lightface.
+
+
+
+CODE:
+	</PLUR>
+FUNCTION:
+	Specifies the end of plural inflected forms.
+
+
+
+CODE:
+	<SING>
+FUNCTION:
+	Specifies the beginning of singular inflected forms.  Outputs ", sing. "
+	in small lightface.
+
+
+
+CODE:
+	</SING>
+FUNCTION:
+	Specifies the end of singular inflected forms.
+
+
+
+CODE:
+	<CON>
+FUNCTION:
+	Specifies the beginning of conjugate inflected forms.  Outputs ", conj. "
+	in small lightface.
+
+
+
+CODE:
+	</CON>
+FUNCTION:
+	Specifies the end of conjugate inflected forms.
+
+
+
+
+CODE:
+	<IOR>
+FUNCTION:
+	Specifies the beginning of a list of inflected orthographies.
+
+	Turns off dfl italics.  For the second and following one of these 
+	codes between any of the begin inflect codes, a ", " is output.
+
+
+
+CODE:
+	</IOR>
+FUNCTION:
+	Specifies the end of a list of inflected orthographies.
+
+        Turns on dfl italics.
+
+
+
+
+
+CODE:
+	<PRON>
+FUNCTION:
+	Specifies the beginning of a list of pronunciations.  Changes the
+	current font to small lightface.  Outputs " (".
+
+
+
+CODE:
+	</PRON>
+FUNCTION:
+	Specifies the end of a list of pronunciations.  Outputs a ")".
+
+
+
+
+CODE:
+	<ETYM>
+FUNCTION:
+	Specifies the beginning of an etymology.  Changes the current font to
+	small lightface. Outputs a " [".
+
+
+
+CODE:
+	</ETYM>
+FUNCTION:
+	Specifies the end of an etymology.  Outputs a "]".
+
+
+
+
+CODE:
+	<SEEUN>
+FUNCTION:
+	Specifies the beginning of a see under type cross reference. Outputs
+	" See under ".
+
+
+
+CODE:
+	</SEEUN>
+FUNCTION:
+	Specifies the end of a see under type cross reference.  Outputs a  ".".
+
+
+
+
+CODE:
+	<CIT>
+FUNCTION:
+	Specifies the beginning of a list of cites.  Changes the font to small
+	lightface.  Outputs a " [".
+
+
+
+CODE:
+	</CIT>
+FUNCTION:
+	Specifies the end of a list of cites.  Outputs a "]".
+
+
+
+
+CODE:
+	<USE>
+FUNCTION:
+	Specifies the beginning of usage text.
+
+
+
+CODE:
+	</USE>
+FUNCTION:
+	Specifies the end of usage text.
+
+
+
+
+CODE:
+	<SYXT>
+FUNCTION:
+	Specifies the beginning of a list of synonym cross reference
+	terminators.
+	
+	Outputs " SYN: "
+
+
+
+CODE:
+	</SYXT>
+FUNCTION:
+	Specifies the end of a list of synonym cross reference terminators.
+	Outputs a "."
+
+
+
+
+CODE:
+	<SEN>
+FUNCTION:
+	Specifies the beginning of the sense information.
+
+
+
+CODE:
+	</SEN>
+FUNCTION:
+	Specifies the end of the sense information.
+
+
+
+
+CODE:
+	<PUSE>
+FUNCTION:
+	Specifies the beginning of the post usage text.  This
+	field is used to store the detailed examination of the
+	"high profile" terms.
+
+
+
+CODE:
+	</PUSE>
+FUNCTION:
+	Specifies the end of the post usage text.
+
+
+
+
+CODE:
+	<SEE>
+FUNCTION:
+	Specifies the beginning of a see type cross reference.
+	Turns on dfl italics.
+
+
+CODE:
+	</SEE>
+FUNCTION:
+	Specifies the end of a see type cross reference. Outputs a ".".
+
+        Turns off dfl italics.
+
+
+
+
+CODE:
+	<SEEAL>
+FUNCTION:
+	Specifies the beginning of a list of see also type cross reference.  It
+	outputs " SEE ALSO: "
+
+        Turns on dfl italics.
+
+
+
+CODE:
+	</SEEAL>
+FUNCTION:
+	Specifies the end of a list of see also type cross reference.  It
+	outputs "."
+
+        Turns off dfl italics.
+
+
+
+
+CODE:
+	<GSEE>
+FUNCTION:
+	Specifies the beginning of a generic see type cross reference.
+
+PARAMATERS:
+	TY=0  (O)	If this parameter is present, then " See entries under " 
+			is output, and dfl italics is turned on.
+        -none-		Same as with TY=0
+	TY=1  (O)	No leading text is output
+
+
+CODE:
+	</GSEE>
+FUNCTION:
+	Specifies the end of a generic see type cross reference. Outputs a ".".
+
+        Turns off dfl italics.
+
+
+CODE:
+	<GSEEAL>
+FUNCTION:
+	Specifies the beginning of a generic see also type cross reference.
+
+PARAMATERS:
+	TY=0  (O)	If this parameter is present, then " See also entries under " 
+			is output, and dfl italics is turned on.
+        -none-		Same as with TY=0
+	TY=1  (O)	No leading text is output
+
+
+
+CODE:
+	</GSEEAL>
+FUNCTION:
+	Specifies the end of a generic see also type cross reference. Outputs a ".".
+
+        Turns off dfl italics.
+
+
+CODE:
+	<SUBS>
+FUNCTION:
+	Specifies the begining of the subentry information, including the 
+	subentry's orthography, any variant's or inflected form's orthography, 
+	any abbreviations for the subentry or variants, the pronuncation, and 
+	the etymology.
+	
+        Turns off dfl italics.
+PARAMETERS:
+	SPCOMB=Y	(O)	Denotes that the term is a special combining form	
+	HIGHPROF=Y	(O)	Denotes that the term is a high profile term
+
+
+CODE:
+	</SUBS>
+FUNCTION:
+	Specifies the end of subentry information.  Outputs a ",".  Sets the
+	current font to be small lightface.
+
+        Turns on dfl italics.
+
+
+
+
+CODE:
+	<SU>
+FUNCTION:
+	Specifies the start of a subentry.  Sets the current font to be small
+	boldface.
+
+
+
+CODE:
+	</SU>
+FUNCTION:
+	Specifies the end of a subentry. Sets the current font to be small
+	lightface.  Causes a line break, and any window space to be output.
+
+
+
+
+CODE:
+	<ABB>
+FUNCTION:
+	Specifies the beginning of a list of abbreviations. Outputs " (".
+
+
+
+
+CODE:
+	</ABB>
+FUNCTION:
+	Specifies the end of a lost of abbreviations.  Outputs ")".
+
+
+
+
+
+CODE:
+	<VAR>
+FUNCTION:
+	Specifies the beginning of a lexeme reference to a variant.
+
+        Turns off dfl italics.
+PARAMETERS:
+	PREF=0   (O)	changes current font to small bold. 
+	PREF=1	 (O)	
+
+
+
+
+CODE:
+	</VAR>
+FUNCTION:
+	Specifies the end of a lexeme reference to a variant.
+
+        Turns on dfl italics.
+
+
+
+
+CODE:
+	<INSUB>
+FUNCTION:
+	Specifies the beginning of a reference to another subentry under the 
+	current lemma.  Saves the current state of dfl italics, an then turns
+        dfl italics off.
+
+
+
+CODE:
+	</INSUB>
+FUNCTION:
+	Specifies the end of a reference to another subentry under the current
+	lemma.  Restores the state of dfl italics stored in the <INSUB> code.
+
+
+
+
+CODE:
+	<SEQ>
+FUNCTION:
+	Specifies the beginning of a sense sequence number.  If this code is
+	within the scope of the <MAIN> codes, then it outputs a space,
+	otherwise it outputs a " (".
+
+
+
+CODE:
+	</SEQ>
+FUNCTION:
+	Specifies the end of a sense sequence number.  If this code is
+	within the scope of the <MAIN> codes, then it outputs nothing,
+	otherwise it outputs a ")".
+
+
+
+
+CODE:
+	<CHEM>
+FUNCTION:
+	Specifies the beginning of a chemical formula. Outputs a space.
+
+
+
+CODE:
+	</CHEM>
+FUNCTION:
+	Specifies the end of a chemical formula. Outputs ";".
+
+
+
+
+CODE:
+	<SYST>
+FUNCTION:
+	Specifies the beginning of a list of systematic names. Outputs a space.
+
+
+
+CODE:
+	</SYST>
+FUNCTION:
+	Specifies the end of a list of systematic names. Outputs ";".
+
+
+
+
+CODE:
+	<SYNX>
+FUNCTION:
+	Specifies the beginning of a list of synonym cross references. Outputs
+	a " SYN: ".
+
+        Turns on dfl italics.
+PARAMETERS:
+	OFFALT=Y   (O)	outputs text "&star; official atlternate term for "
+
+
+
+CODE:
+	</SYNX>
+FUNCTION:
+	Specifies the ending of a list of synonym cross references.
+
+	Outputs a "."
+
+        Turns off dfl italics.
+
+
+
+
+CODE:
+	<EXAM>
+FUNCTION:
+	Specifies the beginning of the example text. Outputs a space.
+
+
+
+CODE:
+	</EXAM>
+FUNCTION:
+	Specifies the end of the example text. Outputs a period.
+
+
+
+
+CODE:
+	<OFFALT>
+FUNCTION:
+	Specifies the beginning of an official alternate term
+
+
+
+CODE:
+	</OFFALT>
+FUNCTION:
+	Specifies the end of an official alternate term.  Outputs a &star;
+
+
+
+
+CODE:
+	<CF>
+FUNCTION:
+	Specifies the beginning of a list of cf type cross references.  Outputs
+	" Cf.: " in normal.
+
+        Turns on dfl italics.
+
+
+
+CODE:
+	</CF>
+FUNCTION:
+	Specifies the end of a list of cf type cross references.  Outputs
+	".".
+
+        Turns off dfl italics.
+
+
+
+
+CODE:
+	<STXT>
+FUNCTION:
+	Specifies the beginning of sense text.  Outputs a space.
+
+        Turns off dfl italics.
+
+
+
+CODE:
+	</STXT>
+FUNCTION:
+	Specifies the end of sense text.
+
+        Turns on dfl italics.
+
+
+
+
+
+
+CODE:
+	<SAPEC>
+FUNCTION:
+	Specifies the beginning of various text at the beginning of 
+	a sense, including the sequence number, abbreviation, pronounciation,
+	and cite.  Changes the current font to bold.
+
+
+
+CODE:
+	</SAPEC>
+FUNCTION:
+	Specifies the end of the information started by the <SAPEC> code.
+	If this code is within the scope of the <MAIN> codes, then a period
+	is output, otherwise if there was an <ABB>, <ETYM>, <PRON> or <CIT>
+	code was processed within the <SAPEC> codes, then a comma is output.
+	The font is then changed to small lightface.
+
+
+
+
+
+CODES:
+	<WINDOW>
+FUNCTION:
+	This codes causes the information passed through the parameters to 
+	be saved.  This information is utilized in the </SU> and </MAIN> codes.
+PARAMETERS:
+	ARTY=     (R)	type of artwork to go into window (CUT or MERGE or EXTERNAL)
+			CUT windows just have space left for them.  MERGE tables
+			have the actual graphic merged in.  EXTERNAL graphics are 
+			just for refernece purposes.
+	WLEN=#.#  (R)	length of window in picas.points
+	WWID=#    (R)  	width of window in columns.  If this is 0 a full page
+			window is assumed
+	ID=\..\   (R)	id to be placed in window space
+	CAP=\..\  (R)	caption to go into window - only placed for MERGE windows
+	FILE=\..\ (R)	name of file which contains graphic to be merged.  Ignored
+			if window type is CUT.
+	GLEN=#.#  (O)	Length of graphic to be merged.  Only for MERGE windows
+	GWID=#.#  (O)	Width of graphic to be merged.  Only for merge windows.	
+
+	If WLEN=0.0 and WWID=0.0, the a full page of space is left.
+
+
+
+
+
+CODE:
+	<ALPHABREAK>
+FUNCTION:
+	Specifies the beginning of a new letter.  Causes the current page to
+	be ended, and a new headings on the next page consisting of the letter
+	passed in the LET=a parameter.
+PARAMETERS:
+	LET=a	(R)	a stands for a capital letter of the alphabet.
+
+
+
+
+
+CODE:
+	<REF>
+FUNCTION:
+	Specifies the beginning of an embedded lexeme reference.  This code is 
+	supplied by the extract program, but it is directly substituted for the
+	<LEXREF> code that appears in the database.  The same is true for the
+	</REF> and </LEXREF> codes.
+
+        Turns on dfl italics.
+
+
+
+CODE:
+	</REF>
+FUNCTION:
+	Specifies the end of an embedded lexeme reference.
+
+        Turns off dfl italics.
+
+
+
+
+
+CODE:
+	<RSEQ>
+FUNCTION:
+	Specifies the beginning of a sequence number of a sense reference.
+	Outputs " (".  This code is supplied by the extract program, but it
+	is placed within the scope of the <REF> codes, in the case where the
+	<LEXREF> code that appears in the database references a sense.
+
+
+
+CODE:
+	</RSEQ>
+FUNCTION:
+	Specifies the end of a sequence number of a sense reference.
+	Outputs ")".
+
+
+
+
+
+CODE:
+        <INTER>
+FUNCTION:
+        This code doesn't do anything at this point.
+
+
+
+CODE:
+        </INTER>
+FUNCTION:
+        This code doesn't do anything at this point.
+
+
+
+
+
+
+
+
+CODE:
+        <EDNOTE>
+FUNCTION:
+        This code denotes the beginning of an Editorial Note.  Such notes
+	should appear in data extract for composition purposes only, and should
+	never appear in data extracted for distribution.
+
+
+
+CODE:
+        </EDNOTE>
+FUNCTION:
+        End of Editorial Note
+
+
+
+
+
+
+
+
+CODE:
+        <IB>
+FUNCTION:
+        Ignore Break code.   This code is sued to precede characters which 
+	normally can be broken after (ie. the line on the page can be ended
+	directly following the characters), but which for some special reason
+	cannot be broken after in certain cases.  The usual example is a word
+	the begins with a hyphen, such as those found in an etymology or 
+	pronunciation.
+
+	This code should appear in data extract for composition purposes only, 
+	and should never appear in data extracted for distribution.
+
+
+
+CODE:
+        <SPECIAL>
+FUNCTION:
+        This code appears only if the current file was extracted for the 
+	purpose of creating a consultants galley.  It denotes the beginning 
+	of misc speciality information that prints in the margin of those galleys.
+PARAMETERS:
+	ORTH=\...\	(R)	The orthography of the term
+	
+
+
+
+CODE:
+        </SPECIAL>
+FUNCTION:
+        This code denotes the end of speciality galley specific information
+
+
+
+CODE:
+        <LEXKEY>
+FUNCTION:
+        This code appears only if the current file was extracted for the 
+	purpose of creating a consultants galley.  It denotes the beginning 
+	of the key of the lexeme.
+	
+
+
+
+CODE:
+        </LEXKEY>
+FUNCTION:
+        This code denotes the end of lexeme key.
+
+
+
+CODE:
+        <CLASS>
+FUNCTION:
+        This code appears only if the current file was extracted for the 
+	purpose of creating a consultants galley.  It denotes the beginning 
+	of a speciality code.
+	
+
+
+
+CODE:
+        </CLASS>
+FUNCTION:
+        This code denotes the end of a speciality code.
+
+
+

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DictionaryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DictionaryModelStoreContainer">
+          <EntitySet Name="WoltersKluwer_Stedman_Medical" EntityType="DictionaryModel.Store.WoltersKluwer_Stedman_Medical" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WoltersKluwer_Stedman_Medical_Aliases" EntityType="DictionaryModel.Store.WoltersKluwer_Stedman_Medical_Aliases" store:Type="Tables" store:Schema="dbo" store:Name="WoltersKluwer_Stedman_Medical_Aliases">
+            <DefiningQuery>SELECT 
+      [WoltersKluwer_Stedman_Medical_Aliases].[WordID] AS [WordID], 
+      [WoltersKluwer_Stedman_Medical_Aliases].[Word] AS [Word], 
+      [WoltersKluwer_Stedman_Medical_Aliases].[RelType] AS [RelType]
+      FROM [dbo].[WoltersKluwer_Stedman_Medical_Aliases] AS [WoltersKluwer_Stedman_Medical_Aliases]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <EntityType Name="WoltersKluwer_Stedman_Medical">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Word" Type="varchar" Nullable="false" MaxLength="70" />
+          <Property Name="Txt" Type="text" Nullable="false" />
+          <Property Name="WordOriginal" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Dictionary.dbo.WoltersKluwer_Stedman_Medical_Aliases' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="WoltersKluwer_Stedman_Medical_Aliases">
+          <Key>
+            <PropertyRef Name="WordID" />
+            <PropertyRef Name="Word" />
+            <PropertyRef Name="RelType" />
+          </Key>
+          <Property Name="WordID" Type="int" Nullable="false" />
+          <Property Name="Word" Type="varchar" Nullable="false" MaxLength="70" />
+          <Property Name="RelType" Type="int" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DictionaryModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DictionaryEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Entries" EntityType="DictionaryModel.Entry" />
+          <EntitySet Name="EntryAliases" EntityType="DictionaryModel.EntryAlias" />
+          <AssociationSet Name="EntryEntryAlias" Association="DictionaryModel.EntryEntryAlias">
+            <End Role="Entry" EntitySet="Entries" />
+            <End Role="EntryAlias" EntitySet="EntryAliases" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="EntryId" />
+          </Key>
+          <Property Name="EntryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Headword" Type="String" Nullable="false" MaxLength="70" Unicode="false" FixedLength="false" />
+          <Property Name="Article" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="OriginalHeadword" Type="String" MaxLength="70" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="EntryAliases" Relationship="DictionaryModel.EntryEntryAlias" FromRole="Entry" ToRole="EntryAlias" />
+        </EntityType>
+        <EntityType Name="EntryAlias">
+          <Key>
+            <PropertyRef Name="EntryId" />
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="RelationType" />
+          </Key>
+          <Property Name="EntryId" Type="Int32" Nullable="false" />
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="70" Unicode="false" FixedLength="false" />
+          <Property Name="RelationType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Entry" Relationship="DictionaryModel.EntryEntryAlias" FromRole="EntryAlias" ToRole="Entry" />
+        </EntityType>
+        <Association Name="EntryEntryAlias">
+          <End Type="DictionaryModel.Entry" Role="Entry" Multiplicity="1" />
+          <End Type="DictionaryModel.EntryAlias" Role="EntryAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entry">
+              <PropertyRef Name="EntryId" />
+            </Principal>
+            <Dependent Role="EntryAlias">
+              <PropertyRef Name="EntryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DictionaryModelStoreContainer" CdmEntityContainer="DictionaryEntities">
+          <EntitySetMapping Name="Entries">
+            <EntityTypeMapping TypeName="DictionaryModel.Entry">
+              <MappingFragment StoreEntitySet="WoltersKluwer_Stedman_Medical">
+                <ScalarProperty Name="EntryId" ColumnName="ID" />
+                <ScalarProperty Name="Headword" ColumnName="Word" />
+                <ScalarProperty Name="Article" ColumnName="Txt" />
+                <ScalarProperty Name="OriginalHeadword" ColumnName="WordOriginal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntryAliases">
+            <EntityTypeMapping TypeName="DictionaryModel.EntryAlias">
+              <MappingFragment StoreEntitySet="WoltersKluwer_Stedman_Medical_Aliases">
+                <ScalarProperty Name="EntryId" ColumnName="WordID" />
+                <ScalarProperty Name="Alias" ColumnName="Word" />
+                <ScalarProperty Name="RelationType" ColumnName="RelType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

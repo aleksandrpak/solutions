@@ -1,0 +1,62 @@
+﻿RSEQ	 (	)
+ABB	 (	)
+SPECIES	<i>	</i>
+ITAL	<i>	</i>
+GENUS	<i>	</i>
+GENSPEC	<i>	</i>
+FOR	<i>	</i>
+FAMILY	<i>	</i>
+EMPH	<i>	</i>
+ACRO	<i>	</i>
+SUBSPEC	<span style='font-weight:normal;font-style:normal;font-variant:normal;'>subsp. </span><i>	</i>.
+CF	<span style='font-weight:normal;font-style:normal;font-variant:normal;'> Cf.: </span><i>	</i>.
+CHEM	 	;
+EXAMPLE INTRO="eg"	<i>e.g., </i>
+EXAMPLE INTRO="ie"	<i>i.e., </i>
+SEEAL	<br />See also: <i>	</i>,
+SEEUN	<br />See under: <i>	</i>.
+SYXT	 Synonyms: <i>	</i>.
+SYNX	 Synonyms: <i>	</i>.
+SYNX OFFALT="Y"	&star; official alternate term for <i>	</i>.
+REF	<i>	</i>
+GSEE TY="1"	<br />	.
+GSEE	<br />See entries under:	.
+SEE	<br />See: <i>	</i>.
+MHP	&#x2027;
+SP	&#x2027;
+HP	&#x2027;
+INSUB	<span style='font-weight:normal;font-style:normal;font-variant:normal;'>	</span>
+IOR	<span style='font-weight:normal;font-style:normal;font-variant:normal;'>	</span>
+LEM CLS="ABB"		.
+LEM CLS="BIO"		,
+LEM
+LEM CLS="SYM"
+LOR	<span class='hw'>	</span>
+OFFALT	&star;
+PRON	<span class='pron'> (	)</span>
+PUSE	 <i>	</i>
+USE	 <i>	</i>
+SMCAP	<span style='font-variant:small-caps'>	</span>
+SUPER	<sup>	</sup>
+SUB	<sub>	</sub>
+SYST	 	;
+VORL	, 
+SAPEC	</div><div class='ds-list'><b>	</b>
+GPLU	<span style='font-weight:normal;font-style:normal;font-variant:normal;'>, gen. and pl. </span>"
+GEN	<span style='font-weight:normal;font-style:normal;font-variant:normal;'>, gen. </span>
+PLUR	<span style='font-weight:normal;font-style:normal;font-variant:normal;'>, pl. </span>
+SING	<span style='font-weight:normal;font-style:normal;font-variant:normal;'>, sing. </span>
+ETYM	 [<span style='font-weight:normal;font-style:normal;font-variant:normal;'>	</span>]
+CIT	 [<span style='font-weight:normal;font-style:normal;font-variant:normal;'>	</span>]
+ETYMON	<span style='font-weight:normal;font-style:normal;font-variant:normal;'>	</span>
+DENOM	/
+FRACTION
+NUM
+VOR
+VOR LEM="BIO"
+FORMULA WIDTH="3.5" HEIGHT="2.9" FILE="TERT.EPS" BREAK="Y"
+FORMULA WIDTH="3.9" HEIGHT="2.3" FILE="SECD.EPS" BREAK="Y"
+STXT
+SEN	<div class='ds-single'>	</div>
+STRS
+SEQ		. 

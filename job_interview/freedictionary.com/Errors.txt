@@ -1,0 +1,39 @@
+Word issues:
+
+#. great anastomotic artery: Links do not navigate to the correct pages (this is a recurring error).
+#. Q bands: "A bands" navigates to "a-".
+#. Q bands: Number 2 definition is blank.
+#. AAV: Extra character after the hyphen
+#. abfarad: Needs a space between the exponent and "farads"
+#. Aagenaes: Missing period after "O" (which is an initial of a name);
+#. A.S.: Needs a space between "ear" and "be" (the text changes from regular to italics here. Probably same issue as #1)
+#. -amic: Missing the second period in e.g. (This error is repeated in all instances of e.g.)
+#. -agogue: Needs a space between "-ogog" and "and" and also after "agogos," (This error is repeated in all cases of the italicized root word followed by a comma)
+#. radicular arteries: What the meaning of words "spinal arteries , segmental medullary arteries.". If it is synonyms, it should be placed in separate line with prefix "Synonyms: ". Also, extra space before comma here. (!!! These references are eliminated !!!) Also, word "Syn:" should be replaced to "Synonyms: ".
+#. alpha: In text there are  2 dots at the end. Where one extra dot comes from?
+#. 198Au colloid: looks unfinished
+#. A: extra dots after links.
+#. A bands: missed space between headword and text
+#. a-: Origin (in []) should be in separate line (and probably in separate div)
+#. 9,10-anthraquinone: should be space between number ("1.", "2.") and text
+#. Aaron: bad character in html. Also in "Abadie"
+#. AB: should be converted to alias to "abortion"
+#. Abadie: "See" section should starts from new line (!!! See section is eliminated !!!)
+#. 198Au colloid: has alias "Au". Should be "Au colloid"
+#. 65Zn: should be converted to alias to "zinc 65". The same with "Aad", "ALT"
+#. alternans: Links are not working. (!!! These references are eliminated !!!)
+#. alum: last links is not working
+#. "arterial", "-agogue", "-agra", "-ase": displays incorrect (looks like broken html)
+#. "A.S.", "A.D.": extra dot right after headword in text.
+#. "1-acylglycerol-3-phosphate acyltransferase", "133Xe": If the article contains reference to another article only, it should be converted to alias to this article. If referenced Article doesn’t exists in the source, than it should be removed completely (except it is explain some abbreviation, like "AAMC")
+#. "-amic", "-ate", "Alstrom": bad characters in html
+#. "Altherr", "Altmann": Extra comma after pronunciation
+
+General issues:
+
+#. "See" and "See also" sections should be eliminated if there are no such word in dictionary (but not "Synonyms"). See "Aarskog".
+#. I would add alias "Xe" for "133Xe" and all such words.
+#. In headwords like "(anterior and posterior) radicular arteries" we should remove data in parenthesizes, because it makes no sense for using in suggestions: "(anterior and posterior) radicular arteries" à "radicular arteries"
+#. Lists should be created using div with class ds-list. See tfd.com. Otherwise, you should place all article text in div with class ds-single.
+#. Extra spaces before dots and after links.
+#. We should remove all extra spaces and all line breaks from html ("txt")

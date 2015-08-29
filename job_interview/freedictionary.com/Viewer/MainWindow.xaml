@@ -1,0 +1,73 @@
+﻿<Window x:Class="Viewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow"
+        Width="800"
+        Height="700">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="LbAliases"
+                 Grid.RowSpan="2"
+                 Grid.Column="1"
+                 Margin="10"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 SelectionChanged="LbAliasesSelectionChangedEventHandler" />
+
+        <TextBox x:Name="TbHeadword"
+                 Grid.Row="0"
+                 Grid.Column="0"
+                 Height="23"
+                 Margin="10,10,10,0"
+                 VerticalAlignment="Top"
+                 KeyDown="TbHeadwordKeyDownEventHandler"
+                 TextWrapping="Wrap" />
+        <Button x:Name="BtnOpen"
+                Grid.Row="0"
+                Grid.Column="0"
+                Width="75"
+                Height="20"
+                Margin="10,38,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="BtnOpenClickEventHandler"
+                Content="Open" />
+        <Button x:Name="BtnPrevious"
+                Grid.Row="0"
+                Grid.Column="0"
+                Width="75"
+                Height="20"
+                Margin="90,38,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="BtnPreviousClickEventHandler"
+                Content="Previous" />
+        <Button x:Name="BtnNext"
+                Grid.Row="0"
+                Grid.Column="0"
+                Width="75"
+                Height="20"
+                Margin="170,38,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="BtnNextClickEventHandler"
+                Content="Next" />
+
+        <WebBrowser x:Name="WbMain"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Navigating="WebBrowserNavigatingEventHandler" />
+
+    </Grid>
+</Window>
