@@ -105,6 +105,14 @@ public class MP1 {
             }
         }
 
+        // I don't like this copying for just sorting
+        // Had an idea to keep track of current top 20 words
+        // But that way I need to handle different words with same count
+        // At the end of the collection with current top 20 words
+        // Keep track of all tail elements with same count in different collection
+        // Keep first 20 in heap data structure to have knowledge of the minimum
+        // And maintain tail only if there are elements with equal count to minimum
+        // But all this requires a lot of complication and own class with comparing and equals abilities
         ArrayList<Map.Entry<String, Integer>> entries = new ArrayList<>(wordCount.entrySet());
         Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>() {
             @Override
