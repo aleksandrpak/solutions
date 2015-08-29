@@ -12,6 +12,10 @@ void replace(char* str) {
 		}
 	}
 
+	if (spaceCount == 0) {
+	    return;
+    }
+
 	int newLen = len + spaceCount * 2;
 	str[newLen] = 0;
 
