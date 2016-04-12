@@ -4,8 +4,19 @@ import sys
 def fast_count_segments(starts, ends, points):
     cnt = [0] * len(points)
 
-    for i in range(0, len(ends)):
+    all = []
+    all.extend([(x, 'l', 0) for x in starts])
+    all.extend([(x, 'r', 0) for x in ends])
+    all.extend([(points[i], 'p', i) for i in range(0, len(points))])
 
+    s = 0
+    for (_, t, i) in sorted(all, key=lambda x: (x[0], x[1])):
+        if (t == 'l'):
+            s += 1
+        elif (t == 'r'):
+            s -= 1
+        else:
+            cnt[i] = s
 
     return cnt
 
