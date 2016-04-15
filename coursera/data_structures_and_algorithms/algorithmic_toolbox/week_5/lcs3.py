@@ -1,23 +1,22 @@
 #Uses python3
 
-import sys
-
 def lcs3(a, b, c):
-    #write your code here
-    return min(len(a), len(b), len(c))
+    d = [[[0 for x in range(len(c) + 1)] for x in range(len(b) + 1)] for x in range(len(a) + 1)] 
 
-if __name__ == '__main__':
-    input = sys.stdin.read()
-    data = list(map(int, input.split()))
-    an = data[0]
-    data = data[1:]
-    a = data[:an]
-    data = data[an:]
-    bn = data[0]
-    data = data[1:]
-    b = data[:bn]
-    data = data[bn:]
-    cn = data[0]
-    data = data[1:]
-    c = data[:cn]
-    print(lcs3(a, b, c))
+    for i in reversed(range(len(a))):
+        for j in reversed(range(len(b))):
+            for k in reversed(range(len(c))):
+                d[i][j][k] = d[i + 1][j + 1][k + 1]
+
+                if a[i] == b[j] and b[j] == c[k]:
+                    d[i][j][k] += 1
+
+                d[i][j][k] = max(d[i][j][k], d[i + 1][j][k], d[i][j + 1][k], d[i][j][k + 1])
+
+    return d[0][0][0]
+
+def read_input():
+    input()
+    return list(map(int, input().split()))
+
+print(lcs3(read_input(), read_input(), read_input()))
