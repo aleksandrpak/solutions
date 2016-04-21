@@ -9,23 +9,39 @@ parent = list(range(0, n))
 ans = max(lines)
 
 def getParent(table):
-    # find parent and compress path
+    if table != parent[table]:
+        parent[table] = getParent(parent[table])
+
     return parent[table]
 
-def merge(destination, source):
+def merge(destination, source, ans):
     realDestination, realSource = getParent(destination), getParent(source)
 
     if realDestination == realSource:
-        return False
+        return ans
 
-    # merge two components
-    # use union by rank heuristic 
-    # update ans with the new maximum table size
+    if rank[realDestination] > rank[realSource]:
+        parent[realSource] = realDestination
+        lines[realDestination] += lines[realSource]
+        lines[realSource] = 0
+
+        if lines[realDestination] > ans:
+            ans = lines[realDestination]
+    else:
+        parent[realDestination] = realSource
+        lines[realSource] += lines[realDestination]
+        lines[realDestination] = 0
+
+        if lines[realSource] > ans:
+            ans = lines[realSource]
+
+        if rank[realDestination] == rank[realSource]:
+            rank[realSource] += 1
     
-    return True
+    return ans
 
 for i in range(m):
     destination, source = map(int, sys.stdin.readline().split())
-    merge(destination - 1, source - 1)
+    ans = merge(destination - 1, source - 1, ans)
     print(ans)
     

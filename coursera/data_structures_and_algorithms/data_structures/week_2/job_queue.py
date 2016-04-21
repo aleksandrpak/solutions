@@ -11,20 +11,33 @@ class JobQueue:
         for i in range(len(self.jobs)):
           print(self.assigned_workers[i], self.start_times[i]) 
 
+    def sift_down(a, i):
+        l = 2 * i + 1
+        r = 2 * i + 2
+
+        m = i
+        if l < len(a) and ((a[l][0] < a[m][0]) or (a[l][0] == a[m][0] and a[l][1] < a[m][1])):
+            m = l
+
+        if r < len(a) and ((a[r][0] < a[m][0]) or (a[r][0] == a[m][0] and a[r][1] < a[m][1])):
+            m = r
+
+        if i != m:
+            a[i], a[m] = a[m], a[i]
+            JobQueue.sift_down(a, m)
+
     def assign_jobs(self):
         # TODO: replace this code with a faster algorithm.
         self.assigned_workers = [None] * len(self.jobs)
         self.start_times = [None] * len(self.jobs)
-        next_free_time = [0] * self.num_workers
+        next_free_time = [(0, i) for i in range(self.num_workers)]
 
         for i in range(len(self.jobs)):
-          next_worker = 0
-          for j in range(self.num_workers):
-            if next_free_time[j] < next_free_time[next_worker]:
-              next_worker = j
-          self.assigned_workers[i] = next_worker
-          self.start_times[i] = next_free_time[next_worker]
-          next_free_time[next_worker] += self.jobs[i]
+          self.assigned_workers[i] = next_free_time[0][1]
+          self.start_times[i] = next_free_time[0][0]
+          
+          next_free_time[0] = (next_free_time[0][0] + self.jobs[i], next_free_time[0][1])
+          JobQueue.sift_down(next_free_time, 0)
 
     def solve(self):
         self.read_data()
