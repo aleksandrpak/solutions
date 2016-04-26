@@ -10,6 +10,7 @@ class TreeOrders:
     self.key = [0 for i in range(self.n)]
     self.left = [0 for i in range(self.n)]
     self.right = [0 for i in range(self.n)]
+
     for i in range(self.n):
       [a, b, c] = map(int, sys.stdin.readline().split())
       self.key[i] = a
@@ -18,24 +19,45 @@ class TreeOrders:
 
   def inOrder(self):
     self.result = []
-    # Finish the implementation
-    # You may need to add a new recursive method to do that
-                
+    self.inOrderRec(0)
     return self.result
+
+  def inOrderRec(self, root):
+    if self.left[root] != -1:
+      self.inOrderRec(self.left[root])
+
+    self.result.append(self.key[root])
+
+    if self.right[root] != -1:
+      self.inOrderRec(self.right[root])
 
   def preOrder(self):
     self.result = []
-    # Finish the implementation
-    # You may need to add a new recursive method to do that
-                
+    self.preOrderRec(0)
     return self.result
+
+  def preOrderRec(self, root):
+    self.result.append(self.key[root])
+
+    if self.left[root] != -1:
+      self.preOrderRec(self.left[root])
+
+    if self.right[root] != -1:
+      self.preOrderRec(self.right[root])
 
   def postOrder(self):
     self.result = []
-    # Finish the implementation
-    # You may need to add a new recursive method to do that
-                
+    self.postOrderRec(0)
     return self.result
+
+  def postOrderRec(self, root):
+    if self.left[root] != -1:
+      self.postOrderRec(self.left[root])
+
+    if self.right[root] != -1:
+      self.postOrderRec(self.right[root])
+
+    self.result.append(self.key[root])
 
 def main():
 	tree = TreeOrders()
