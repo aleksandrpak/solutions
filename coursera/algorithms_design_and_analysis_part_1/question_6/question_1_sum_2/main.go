@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"runtime"
 	"strconv"
 )
 
@@ -16,8 +15,6 @@ func main() {
 	}
 
 	defer file.Close()
-
-	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	nums := make(map[int64]bool)
 	scanner := bufio.NewScanner(file)
