@@ -39,7 +39,7 @@ func main() {
 				diff := t - k
 				if _, found := nums[diff]; found {
 					c <- true
-					break
+					return
 				}
 			}
 
