@@ -3,49 +3,132 @@ import java.io.*;
 import java.util.zip.CheckedInputStream;
 
 public class SuffixTree {
-    class FastScanner {
-        StringTokenizer tok = new StringTokenizer("");
-        BufferedReader in;
+    private static int[] tree = new int[50000];
+    private static int treeSize = 0;
+    public static final int Letters = 5;
+    public static final int NA = 0;
 
-        FastScanner() {
-            in = new BufferedReader(new InputStreamReader(System.in));
+    private static void newNode() {
+        if ((treeSize + 1) * Letters > tree.length) {
+            tree = Arrays.copyOf(tree, tree.length * 2);
         }
 
-        String next() throws IOException {
-            while (!tok.hasMoreElements())
-                tok = new StringTokenizer(in.readLine());
-            return tok.nextToken();
+        treeSize++;
+    }
+
+    private static int size(int node) {
+        int count = 0;
+        node = (node - 1) * Letters;
+
+        for (int i = node; i < node + Letters; i++) {
+            if (tree[i] != 0) {
+                count++;
+            }
         }
 
-        int nextInt() throws IOException {
-            return Integer.parseInt(next());
+        return count;
+    }
+
+    private static int letterToIndex(char letter) {
+        switch (letter) {
+            case 'A': return 0;
+            case 'C': return 1;
+            case 'G': return 2;
+            case 'T': return 3;
+            case '$': return 4;
+            default: return NA;
         }
     }
 
-    // Build a suffix tree of the string text and return a list
-    // with all of the labels of its edges (the corresponding 
-    // substrings of the text) in any order.
-    public List<String> computeSuffixTreeEdges(String text) {
-        List<String> result = new ArrayList<String>();
-        // Implement this function yourself
-        return result;
+    private static char indexToLetter(int index) {
+        switch (index) {
+            case 0: return 'A';
+            case 1: return 'C';
+            case 2: return 'G';
+            case 3: return 'T';
+            case 4: return '$';
+            default: return 0;
+        }
     }
 
+    private static void buildSuffixTree() throws IOException {
+        StringBuilder builder = new StringBuilder();
+        
+        int ch;
+        while ((ch = System.in.read()) != -1) {
+            builder.append((char)ch);
+            if ((char)ch == '$') {
+                break;
+            }
+        }
+        
+        String text = builder.toString();
+
+        newNode();
+        int len = text.length();
+        for (int j = 0; j < len; j++) {
+            int node = 1;
+
+            for (int i = j; i < len; i++) {
+                int letter = letterToIndex(text.charAt(i));
+
+                if (getNode(node, letter) == NA) {
+                    newNode();
+                    setNode(node, letter, treeSize);
+                    node = treeSize;
+                } else {
+                    node = getNode(node, letter);
+                }
+            }
+        }
+    }
+
+    private static void findLeafs(int index, Character c) {
+        int node = index;
+
+        if (size(node) == 1) {
+            boolean isPrinted = false;
+            if (c != null) {
+                System.out.print(c);
+                isPrinted = true;
+            }
+
+            while (size(node) == 1) {
+                for (int i = 0; i < Letters; i++) {
+                    int next = getNode(node, i);
+                    if (next != NA) {
+                        System.out.print(indexToLetter(i));
+                        isPrinted = true;
+                        node = next;
+                        break;
+                    }
+                }
+            }
+
+            if (isPrinted) {
+                System.out.print("\n");
+            }
+        } else if (c != null) {
+            System.out.println(c);
+        }
+
+        for (int i = 0; i < Letters; i++) {
+            if (getNode(node, i) != NA) {
+                findLeafs(getNode(node, i), indexToLetter(i));
+            }
+        }
+    }
+
+    private static int getNode(int node, int letter) {
+        return tree[(node - 1) * Letters + letter];
+    }
+
+    private static void setNode(int node, int letter, int index) {
+        tree[(node - 1) * Letters + letter] = index;
+    }
 
     static public void main(String[] args) throws IOException {
-        new SuffixTree().run();
-    }
-
-    public void print(List<String> x) {
-        for (String a : x) {
-            System.out.println(a);
-        }
-    }
-
-    public void run() throws IOException {
-        FastScanner scanner = new FastScanner();
-        String text = scanner.next();
-        List<String> edges = computeSuffixTreeEdges(text);
-        print(edges);
+        buildSuffixTree();
+        findLeafs(1, null);
     }
 }
